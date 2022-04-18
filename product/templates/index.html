@@ -1,0 +1,43 @@
+  {% extends 'base.html' %}
+  {% block content %} 
+   <div class="container text-center">
+        <div class="col-12">
+            <h1>Productos</h1>
+            <table class="table table-bordered text-center">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>
+                            <a href="#" class="btn btn-success">Editar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <form action="{% url 'crear_producto' %}" class="form-group" method="POST">
+                        <h2>Crear Producto</h2>
+                        {% csrf_token %}
+                        <input type="text" name="name" class="form-control" placeholder="Ingresa el nombre..." required>
+                        <br>
+                        <input type="number" name="price" class="form-control" placeholder="Ingresa el precio..." required> 
+                        <br>
+                        <input type="submit" value="Crear" class="btn btn-success col-12">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
